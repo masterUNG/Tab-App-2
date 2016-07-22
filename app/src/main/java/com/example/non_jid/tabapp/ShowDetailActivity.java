@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ShowDetailActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ShowDetailActivity extends FragmentActivity implements OnMapReadyCallback{
 
     //Explicit
     private GoogleMap mMap;
@@ -85,5 +85,6 @@ public class ShowDetailActivity extends FragmentActivity implements OnMapReadyCa
         .snippet(phoneString));
 
     }   // onMapReady
+
 
 }   //Main Class
