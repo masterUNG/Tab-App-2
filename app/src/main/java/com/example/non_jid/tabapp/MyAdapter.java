@@ -56,7 +56,7 @@ public class MyAdapter extends BaseAdapter{
         shopTextView.setText(shopStrings[i]);
         phoneTextView.setText(phoneStrings[i]);
 
-        String shortPromote = promoteStrings[i].substring(0, 40) + "...";
+        String shortPromote = promoteStrings[i].substring(0, 20) + "...";
         promoteTextView.setText(shortPromote);
 
         return view1;

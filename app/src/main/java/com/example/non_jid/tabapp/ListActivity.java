@@ -15,6 +15,9 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class ListActivity extends AppCompatActivity {
 
     //Explicit
@@ -95,6 +98,42 @@ public class ListActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             Log.d("22JulyV1", "JSON ==> " + s);
+
+            try {
+
+                JSONArray jsonArray = new JSONArray(s);
+
+                shopStrings = new String[jsonArray.length()];
+                addressStrings = new String[jsonArray.length()];
+                promoteStrings = new String[jsonArray.length()];
+                phoneStrings = new String[jsonArray.length()];
+                latStrings = new String[jsonArray.length()];
+                lngStrings = new String[jsonArray.length()];
+
+                for (int i=0;i<jsonArray.length();i+=1) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    shopStrings[i] = jsonObject.getString("Shop");
+                    addressStrings[i] = jsonObject.getString("Address");
+                    promoteStrings[i] = jsonObject.getString("Promote");
+                    phoneStrings[i] = jsonObject.getString("Phone");
+                    latStrings[i] = jsonObject.getString("Lat");
+                    lngStrings[i] = jsonObject.getString("Lng");
+
+                }   // for
+
+                //Create ListView
+                MyAdapter myAdapter = new MyAdapter(context,
+                        shopStrings, phoneStrings, promoteStrings);
+                synListView.setAdapter(myAdapter);
+
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }   // onPost
 
