@@ -71,6 +71,8 @@ public class ShowDetailActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
+
         double douLat = Double.parseDouble(getIntent().getStringExtra("Lat"));
         double douLng = Double.parseDouble(getIntent().getStringExtra("Lng"));
 
