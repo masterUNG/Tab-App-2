@@ -1,6 +1,7 @@
 package com.example.non_jid.tabapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -128,7 +130,22 @@ public class ListActivity extends AppCompatActivity {
                         shopStrings, phoneStrings, promoteStrings);
                 synListView.setAdapter(myAdapter);
 
+                synListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                        Intent intent = new Intent(ListActivity.this, ShowDetailActivity.class);
+                        intent.putExtra("Shop", shopStrings[i]);
+                        intent.putExtra("Address", addressStrings[i]);
+                        intent.putExtra("Phone", phoneStrings[i]);
+                        intent.putExtra("Promote", promoteStrings[i]);
+                        intent.putExtra("Lat", latStrings[i]);
+                        intent.putExtra("Lng", lngStrings[i]);
+                        startActivity(intent);
+
+
+                    }   // onItemClick
+                });
 
 
             } catch (Exception e) {
