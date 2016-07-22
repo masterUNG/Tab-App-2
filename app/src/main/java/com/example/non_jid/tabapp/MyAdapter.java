@@ -15,6 +15,7 @@ public class MyAdapter extends BaseAdapter{
     //Explicit
     private Context context;
     private String[] shopStrings, phoneStrings, promoteStrings;
+    private String shortPromote;
 
     public MyAdapter(Context context,
                      String[] shopStrings,
@@ -56,7 +57,12 @@ public class MyAdapter extends BaseAdapter{
         shopTextView.setText(shopStrings[i]);
         phoneTextView.setText(phoneStrings[i]);
 
-        String shortPromote = promoteStrings[i].substring(0, 20) + "...";
+        if (promoteStrings[i].length() < 40) {
+            shortPromote = promoteStrings[i];
+        } else {
+            shortPromote = promoteStrings[i].substring(0, 40) + "...";
+        }
+
         promoteTextView.setText(shortPromote);
 
         return view1;
