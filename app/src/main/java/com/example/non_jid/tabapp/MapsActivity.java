@@ -11,10 +11,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
@@ -80,6 +85,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             super.onPostExecute(s);
 
             Log.d("22JulyV2", "map JSON ==> " + s);
+
+            try {
+
+                JSONArray jsonArray = new JSONArray(s);
+                for (int i=0;i<jsonArray.length();i+=1) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String strShop = jsonObject.getString("Shop");
+                    String strAddress = jsonObject.getString("Address");
+                    double douLat = Double.parseDouble(jsonObject.getString("Lat"));
+                    double douLng = Double.parseDouble(jsonObject.getString("Lng"));
+                    LatLng latLng = new LatLng(douLat, douLng);
+                    myGoogleMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin))
+                    .title(strShop)
+                    .snippet(strAddress));
+
+                }   //for
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }   // onPost
 
